@@ -1,0 +1,24 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  setup:
+    uses: ./.github/workflows/job-setup.yml
+    with:
+      node-version: '22.8.0'
+
+  build:
+    needs: setup
+    uses: ./.github/workflows/job-build.yml
+
+  lint:
+    needs: setup
+    uses: ./.github/workflows/job-lint.yml
+
+  delete-artifacts:
+    needs: [build, lint]
+    uses: ./.github/workflows/job-delete-artifacts.yml

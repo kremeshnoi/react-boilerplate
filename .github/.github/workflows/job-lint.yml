@@ -1,0 +1,22 @@
+name: Lint
+
+on:
+  workflow_call:
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download node_modules
+        uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+
+      - name: Extract node_modules
+        run: tar -xzf node_modules.tar.gz
+
+      - name: Lint a project
+        run: npm run lint

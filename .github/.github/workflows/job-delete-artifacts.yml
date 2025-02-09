@@ -1,0 +1,16 @@
+name: Delete Artifacts
+
+on:
+  workflow_call:
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Delete Artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: node_modules
